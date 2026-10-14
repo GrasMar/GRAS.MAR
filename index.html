@@ -343,6 +343,18 @@ a { text-decoration: none; }
   40% { transform: translateY(-5px); }
 }
 @media (prefers-reduced-motion: reduce) { .circ-img-wrap, .whatsapp-float { animation: none; } }
+
+/* ── Segmentación por tipo de negocio ── */
+.seg-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+.seg-card { display: block; background: #1d1d1d; color: white; border-radius: 18px; padding: 22px 20px; border: 1px solid #2f2616; box-shadow: 0 10px 26px rgba(0,0,0,0.14); -webkit-tap-highlight-color: transparent; cursor: pointer; }
+.seg-card:active { transform: scale(0.98); }
+.seg-title { display: block; font-size: 1.35rem; font-weight: 900; letter-spacing: 0.04em; color: #f5d08d; text-transform: uppercase; }
+.seg-sub { display: block; margin-top: 6px; font-size: 0.9rem; color: #e8e0d0; line-height: 1.4; }
+.seg-go { display: inline-block; margin-top: 12px; font-weight: 800; font-size: 0.88rem; color: #1d1d1d; background: #d4a022; padding: 8px 14px; border-radius: 999px; }
+.seg-go::after { content: " \203A"; }
+.seg-all { text-align: center; margin-top: 18px; color: #5a5a5a; font-size: 0.9rem; }
+.seg-all a { color: #8a5e10; font-weight: 800; }
+@media (min-width: 700px) { .seg-grid { grid-template-columns: 1fr 1fr; } }
 </style>
 </head>
 <body>
@@ -357,6 +369,7 @@ a { text-decoration: none; }
     </div>
   </nav>
   <div class="nav-menu" id="navMenu">
+    <a href="#tu-negocio" onclick="closeMenu()">Elegí tu negocio</a>
     <a href="#productos" onclick="closeMenu()">Productos</a>
     <a href="catalogo-grasmar.pdf" target="_blank" onclick="gtag('event','ver_catalogo'); closeMenu()">Ver catálogo y precios</a>
     <a href="#beneficios" onclick="closeMenu()">Beneficios</a>
@@ -390,6 +403,38 @@ a { text-decoration: none; }
     <p class="hero-note">Envío gratis en CABA desde $240.000</p>
   </div>
 </header>
+
+  <!-- SEGMENTACIÓN POR TIPO DE NEGOCIO -->
+  <section class="section" id="tu-negocio" style="padding-top:44px;padding-bottom:10px;">
+    <div class="section-header" style="margin-bottom:24px;">
+      <span class="section-tag">Elegí tu negocio</span>
+      <h2>¿Qué tipo de local tenés?</h2>
+      <p>Tocá el que más se parezca al tuyo y te mostramos solo lo que te sirve.</p>
+    </div>
+    <div class="seg-grid">
+      <a class="seg-card" href="#" onclick="gtag('event','segmento_panaderia'); showView('view-seg-panaderia'); return false;">
+        <span class="seg-title">Panaderías</span>
+        <span class="seg-sub">Ingresá acá para ver qué productos de la mejor calidad te sirven para tu negocio.</span>
+        <span class="seg-go">Ver productos</span>
+      </a>
+      <a class="seg-card" href="#" onclick="gtag('event','segmento_empanadas'); showView('view-seg-empanadas'); return false;">
+        <span class="seg-title">Empanadas y frituras</span>
+        <span class="seg-sub">Tiendas y fábricas de empanadas, pastelitos y tortas fritas: lo que necesitás para la masa y para freír.</span>
+        <span class="seg-go">Ver productos</span>
+      </a>
+      <a class="seg-card" href="#" onclick="gtag('event','segmento_parrilla'); showView('view-seg-parrilla'); return false;">
+        <span class="seg-title">Parrillas, bodegones y restaurantes</span>
+        <span class="seg-sub">Grasa de la mejor calidad para tu cocina, tus empanadas y tus minutas.</span>
+        <span class="seg-go">Ver productos</span>
+      </a>
+      <a class="seg-card" href="#" onclick="gtag('event','segmento_pizzeria'); showView('view-seg-pizzeria'); return false;">
+        <span class="seg-title">Pizzerías y rotiserías</span>
+        <span class="seg-sub">Para masas, tartas, empanadas y comida al paso con buen rendimiento.</span>
+        <span class="seg-go">Ver productos</span>
+      </a>
+    </div>
+    <p class="seg-all">¿Querés verlo todo? <a href="#productos">Mirá todos los productos</a></p>
+  </section>
 
   <!-- PRODUCTOS -->
   <section class="section hidden" id="productos" style="padding-top:70px;padding-bottom:40px;">
@@ -796,6 +841,220 @@ document.querySelectorAll('.circ-card').forEach(function(card){
     </div>
   </section>
   <div class="margarina-note">GrasMar Distribuciones • Línea Frida para panadería y producción</div>
+</div>
+
+<div id="view-seg-panaderia" class="view detail-page">
+  <div class="detail-topbar">
+    <a class="detail-back" href="#" onclick="showView('view-home'); return false;">← Volver</a>
+    <div class="detail-brand">GrasMar</div>
+  </div>
+  <section class="section">
+    <div class="section-header">
+      <span class="section-tag">Panaderías</span>
+      <h2>Para tu panadería</h2>
+      <p>Estos productos son los que más usan las panaderías.</p>
+    </div>
+    <div class="detail-wrap">
+      <article class="detail-card">
+        <div class="detail-body">
+          <span class="detail-kicker">Reciento</span>
+          <h3>Grasa Bovina Refinada</h3>
+          <p class="detail-copy">Para bizcochos de grasa, facturas criollas, tortas fritas y pastelitos.</p>
+          <div class="detail-cta">
+            <a class="btn" href="#" onclick="showView('view-reciento-grasa'); return false;">Ver producto</a>
+          </div>
+        </div>
+      </article>
+      <article class="detail-card">
+        <div class="detail-body">
+          <span class="detail-kicker">Reciento</span>
+          <h3>Primer Jugo</h3>
+          <p class="detail-copy">Perfil tradicional para panadería criolla y masas de estilo clásico.</p>
+          <div class="detail-cta">
+            <a class="btn" href="#" onclick="showView('view-reciento-primer'); return false;">Ver producto</a>
+          </div>
+        </div>
+      </article>
+      <article class="detail-card">
+        <div class="detail-body">
+          <span class="detail-kicker">Frida</span>
+          <h3>Margarina para Hojaldre</h3>
+          <p class="detail-copy">Hojaldres suaves, facturas y masas danesas por método directo.</p>
+          <div class="detail-cta">
+            <a class="btn" href="#" onclick="showView('view-frida-hojaldre'); return false;">Ver producto</a>
+          </div>
+        </div>
+      </article>
+      <article class="detail-card">
+        <div class="detail-body">
+          <span class="detail-kicker">Frida</span>
+          <h3>Margarina para Masas</h3>
+          <p class="detail-copy">Masas, budines, cremas y facturas de manteca con método de empaste.</p>
+          <div class="detail-cta">
+            <a class="btn" href="#" onclick="showView('view-frida-masas'); return false;">Ver producto</a>
+          </div>
+        </div>
+      </article>
+      <article class="detail-card">
+        <div class="detail-body">
+          <span class="detail-kicker">Reciento</span>
+          <h3>Sachet</h3>
+          <p class="detail-copy">Formato fraccionado en sachets de 500 g, práctico para manipular.</p>
+          <div class="detail-cta">
+            <a class="btn" href="#" onclick="showView('view-reciento-sachet'); return false;">Ver producto</a>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div class="detail-actions" style="margin-top:22px;">
+      <a class="btn btn-primary" href="https://wa.me/5491136589453" target="_blank" onclick="gtag_report_conversion_wpp();">Consultar por WhatsApp</a>
+      <a class="btn btn-catalog-light" href="catalogo-grasmar.pdf" target="_blank" onclick="gtag('event','ver_catalogo');">Ver catálogo y precios (PDF)</a>
+      <a class="btn btn-outline" href="#" onclick="showView('view-home'); setTimeout(function(){location.hash='#productos'},50); return false;">Ver todos los productos</a>
+    </div>
+  </section>
+</div>
+
+<div id="view-seg-empanadas" class="view detail-page">
+  <div class="detail-topbar">
+    <a class="detail-back" href="#" onclick="showView('view-home'); return false;">← Volver</a>
+    <div class="detail-brand">GrasMar</div>
+  </div>
+  <section class="section">
+    <div class="section-header">
+      <span class="section-tag">Empanadas y frituras</span>
+      <h2>Para tu tienda o fábrica de empanadas</h2>
+      <p>Lo que necesitás para la masa y para freír.</p>
+    </div>
+    <div class="detail-wrap">
+      <article class="detail-card">
+        <div class="detail-body">
+          <span class="detail-kicker">Reciento</span>
+          <h3>Grasa Bovina Refinada</h3>
+          <p class="detail-copy">Para freír y para la masa de empanadas, pastelitos y tortas fritas.</p>
+          <div class="detail-cta">
+            <a class="btn" href="#" onclick="showView('view-reciento-grasa'); return false;">Ver producto</a>
+          </div>
+        </div>
+      </article>
+      <article class="detail-card">
+        <div class="detail-body">
+          <span class="detail-kicker">Reciento</span>
+          <h3>Primer Jugo</h3>
+          <p class="detail-copy">Perfil tradicional para masas criollas y frituras clásicas.</p>
+          <div class="detail-cta">
+            <a class="btn" href="#" onclick="showView('view-reciento-primer'); return false;">Ver producto</a>
+          </div>
+        </div>
+      </article>
+      <article class="detail-card">
+        <div class="detail-body">
+          <span class="detail-kicker">Frida</span>
+          <h3>Margarina para Masas</h3>
+          <p class="detail-copy">Para masas con buena plasticidad y textura.</p>
+          <div class="detail-cta">
+            <a class="btn" href="#" onclick="showView('view-frida-masas'); return false;">Ver producto</a>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div class="detail-actions" style="margin-top:22px;">
+      <a class="btn btn-primary" href="https://wa.me/5491136589453" target="_blank" onclick="gtag_report_conversion_wpp();">Consultar por WhatsApp</a>
+      <a class="btn btn-catalog-light" href="catalogo-grasmar.pdf" target="_blank" onclick="gtag('event','ver_catalogo');">Ver catálogo y precios (PDF)</a>
+      <a class="btn btn-outline" href="#" onclick="showView('view-home'); setTimeout(function(){location.hash='#productos'},50); return false;">Ver todos los productos</a>
+    </div>
+  </section>
+</div>
+
+<div id="view-seg-parrilla" class="view detail-page">
+  <div class="detail-topbar">
+    <a class="detail-back" href="#" onclick="showView('view-home'); return false;">← Volver</a>
+    <div class="detail-brand">GrasMar</div>
+  </div>
+  <section class="section">
+    <div class="section-header">
+      <span class="section-tag">Parrillas, bodegones y restaurantes</span>
+      <h2>Para tu parrilla, bodegón o restaurante</h2>
+      <p>Grasa de la mejor calidad para tu cocina.</p>
+    </div>
+    <div class="detail-wrap">
+      <article class="detail-card">
+        <div class="detail-body">
+          <span class="detail-kicker">Reciento</span>
+          <h3>Grasa Bovina Refinada</h3>
+          <p class="detail-copy">Caja de 20 kg para cocina de parrilla, minutas y empanadas.</p>
+          <div class="detail-cta">
+            <a class="btn" href="#" onclick="showView('view-reciento-grasa'); return false;">Ver producto</a>
+          </div>
+        </div>
+      </article>
+      <article class="detail-card">
+        <div class="detail-body">
+          <span class="detail-kicker">Reciento</span>
+          <h3>Sachet</h3>
+          <p class="detail-copy">Sachets de 500 g para tener porciones listas en cocina.</p>
+          <div class="detail-cta">
+            <a class="btn" href="#" onclick="showView('view-reciento-sachet'); return false;">Ver producto</a>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div class="detail-actions" style="margin-top:22px;">
+      <a class="btn btn-primary" href="https://wa.me/5491136589453" target="_blank" onclick="gtag_report_conversion_wpp();">Consultar por WhatsApp</a>
+      <a class="btn btn-catalog-light" href="catalogo-grasmar.pdf" target="_blank" onclick="gtag('event','ver_catalogo');">Ver catálogo y precios (PDF)</a>
+      <a class="btn btn-outline" href="#" onclick="showView('view-home'); setTimeout(function(){location.hash='#productos'},50); return false;">Ver todos los productos</a>
+    </div>
+  </section>
+</div>
+
+<div id="view-seg-pizzeria" class="view detail-page">
+  <div class="detail-topbar">
+    <a class="detail-back" href="#" onclick="showView('view-home'); return false;">← Volver</a>
+    <div class="detail-brand">GrasMar</div>
+  </div>
+  <section class="section">
+    <div class="section-header">
+      <span class="section-tag">Pizzerías y rotiserías</span>
+      <h2>Para tu pizzería o rotisería</h2>
+      <p>Para masas, tartas, empanadas y comida al paso.</p>
+    </div>
+    <div class="detail-wrap">
+      <article class="detail-card">
+        <div class="detail-body">
+          <span class="detail-kicker">Reciento</span>
+          <h3>Grasa Bovina Refinada</h3>
+          <p class="detail-copy">Para empanadas, minutas y frituras de buen rendimiento.</p>
+          <div class="detail-cta">
+            <a class="btn" href="#" onclick="showView('view-reciento-grasa'); return false;">Ver producto</a>
+          </div>
+        </div>
+      </article>
+      <article class="detail-card">
+        <div class="detail-body">
+          <span class="detail-kicker">Frida</span>
+          <h3>Margarina para Masas</h3>
+          <p class="detail-copy">Para masas, tartas y tapas con buena textura.</p>
+          <div class="detail-cta">
+            <a class="btn" href="#" onclick="showView('view-frida-masas'); return false;">Ver producto</a>
+          </div>
+        </div>
+      </article>
+      <article class="detail-card">
+        <div class="detail-body">
+          <span class="detail-kicker">Reciento</span>
+          <h3>Sachet</h3>
+          <p class="detail-copy">Sachets de 500 g, prácticos para el uso diario.</p>
+          <div class="detail-cta">
+            <a class="btn" href="#" onclick="showView('view-reciento-sachet'); return false;">Ver producto</a>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div class="detail-actions" style="margin-top:22px;">
+      <a class="btn btn-primary" href="https://wa.me/5491136589453" target="_blank" onclick="gtag_report_conversion_wpp();">Consultar por WhatsApp</a>
+      <a class="btn btn-catalog-light" href="catalogo-grasmar.pdf" target="_blank" onclick="gtag('event','ver_catalogo');">Ver catálogo y precios (PDF)</a>
+      <a class="btn btn-outline" href="#" onclick="showView('view-home'); setTimeout(function(){location.hash='#productos'},50); return false;">Ver todos los productos</a>
+    </div>
+  </section>
 </div>
 
 <script>
