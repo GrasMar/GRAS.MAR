@@ -355,11 +355,17 @@ a { text-decoration: none; }
 .seg-all { text-align: center; margin-top: 18px; color: #5a5a5a; font-size: 0.9rem; }
 .seg-all a { color: #8a5e10; font-weight: 800; }
 @media (min-width: 700px) { .seg-grid { grid-template-columns: 1fr 1fr; } }
-.gal-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
-.gal-item { margin: 0; background: white; border-radius: 18px; overflow: hidden; box-shadow: 0 8px 22px rgba(0,0,0,0.08); }
-.gal-item img { width: 100%; display: block; aspect-ratio: 5 / 4; object-fit: cover; }
+.gal-carousel { position: relative; max-width: 760px; margin: 0 auto; }
+.gal-track { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 4px; }
+.gal-track::-webkit-scrollbar { display: none; }
+.gal-item { flex: 0 0 100%; scroll-snap-align: center; margin: 0; background: white; border-radius: 18px; overflow: hidden; box-shadow: 0 8px 22px rgba(0,0,0,0.08); }
+.gal-item img { width: 100%; display: block; aspect-ratio: 4 / 3; object-fit: cover; }
 .gal-item figcaption { padding: 12px 16px 14px; font-size: 0.9rem; color: #5a5a5a; }
-@media (min-width: 700px) { .gal-grid { grid-template-columns: 1fr 1fr; } }
+.gal-nav { position: absolute; top: calc(50% - 40px); width: 42px; height: 42px; border-radius: 50%; border: none; background: rgba(255,255,255,0.92); box-shadow: 0 4px 14px rgba(0,0,0,0.18); font-size: 1.4rem; line-height: 1; color: #222; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.gal-prev { left: 10px; } .gal-next { right: 10px; }
+.gal-dots { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
+.gal-dots button { width: 9px; height: 9px; border-radius: 50%; border: none; padding: 0; background: #d6cdb8; cursor: pointer; }
+.gal-dots button.on { background: #b8860b; width: 22px; border-radius: 6px; }
 </style>
 </head>
 <body>
@@ -581,12 +587,44 @@ a { text-decoration: none; }
       <h2>Mercadería premium en menos de 24 hs</h2>
       <p>Cajas selladas de fábrica, con todos los datos del producto en el envase.</p>
     </div>
-    <div class="gal-grid">
-      <figure class="gal-item">
-        <img src="img/entrega-reciento.jpg" alt="Cajas de grasa bovina refinada Reciento cargadas para entrega" loading="lazy" />
-        <figcaption>Cajas Reciento de 20 kg listas para entregar.</figcaption>
-      </figure>
+    <div class="gal-carousel">
+      <div class="gal-track" id="galTrack">
+        <figure class="gal-item">
+          <img src="img/pallets-frida.jpg" alt="Pallets de margarina Frida listos en el depósito" loading="lazy" />
+          <figcaption>Pallets de margarina Frida, recién llegados de fábrica.</figcaption>
+        </figure>
+        <figure class="gal-item">
+          <img src="img/entrega-reciento.jpg" alt="Cajas de grasa bovina refinada Reciento cargadas para entrega" loading="lazy" />
+          <figcaption>Cajas Reciento de 20 kg listas para entregar.</figcaption>
+        </figure>
+        <figure class="gal-item">
+          <img src="img/pallet-frida.jpg" alt="Pallet de cajas Frida embalado en film" loading="lazy" />
+          <figcaption>Stock de Frida embalado y listo para despachar.</figcaption>
+        </figure>
+        <figure class="gal-item">
+          <img src="img/cajas-reciento-camioneta.jpg" alt="Cajas Reciento de grasa bovina refinada en la camioneta de reparto" loading="lazy" />
+          <figcaption>Grasa bovina refinada Reciento, rumbo a tu local.</figcaption>
+        </figure>
+      </div>
+      <button class="gal-nav gal-prev" type="button" aria-label="Foto anterior" onclick="galGo(-1)">&#8249;</button>
+      <button class="gal-nav gal-next" type="button" aria-label="Foto siguiente" onclick="galGo(1)">&#8250;</button>
+      <div class="gal-dots" id="galDots"></div>
     </div>
+    <script>
+    (function(){
+      var t=document.getElementById('galTrack'), d=document.getElementById('galDots'); if(!t) return;
+      var n=t.children.length, timer;
+      for(var i=0;i<n;i++){ var bt=document.createElement('button'); bt.type='button'; bt.setAttribute('aria-label','Ir a la foto '+(i+1)); (function(k){ bt.onclick=function(){ go(k); }; })(i); d.appendChild(bt); }
+      function idx(){ return Math.round(t.scrollLeft/(t.clientWidth+14)); }
+      function mark(){ var k=idx(); for(var j=0;j<n;j++) d.children[j].className=(j===k?'on':''); }
+      function go(k){ k=(k+n)%n; t.scrollTo({left:k*(t.clientWidth+14),behavior:'smooth'}); }
+      window.galGo=function(s){ go(idx()+s); restart(); };
+      function restart(){ clearInterval(timer); timer=setInterval(function(){ go(idx()+1); },4500); }
+      t.addEventListener('scroll',function(){ window.requestAnimationFrame(mark); });
+      t.addEventListener('touchstart',function(){ clearInterval(timer); },{passive:true});
+      mark(); restart();
+    })();
+    </script>
   </section>
 
   <!-- CONTACTO -->
